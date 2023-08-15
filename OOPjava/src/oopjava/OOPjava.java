@@ -1,34 +1,20 @@
 package oopjava;
 
 import java.util.ArrayList;
+import oopjava.banco.Conta;
+import oopjava.banco.Pessoa;
 
 public class OOPjava {
 
     public static void main(String[] args) {
 
-        ArrayList<Dog> listaCaes = new ArrayList<>();
-        
-        
-        Dono dono1 = new Dono("maçaneiro", "xxxx-xxxx", "Rua tal, nº aquele");
-        
-        
-        
-        
-        Dog cachorro1 = new Dog("Bob", "pincher", 3, "pequeno", dono1);
-
-        System.out.println(cachorro1.getNome());
-        
-        Dog cachorro2 = new Dog("Docinho", "pitbull", 3, "grande", dono1);
-    
-    
-       listaCaes.add(cachorro1);
+      ArrayList<Conta> banco = new ArrayList<>();
+      
+     Pessoa p1  = new Pessoa("nycolas","999.999.999-99");
+     Pessoa p2 = new Pessoa("Felipe","000.000.000-00");
        
-       listaCaes.add(cachorro2);
+    
   
-    
-   
-        
-       
     
     }
 

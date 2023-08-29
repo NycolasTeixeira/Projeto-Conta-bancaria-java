@@ -1,5 +1,5 @@
 
-package oopjava;
+package oopjava.petshop;
 
 
 public class Dono {

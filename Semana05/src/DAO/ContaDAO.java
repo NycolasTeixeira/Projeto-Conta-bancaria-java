@@ -3,12 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.postgres;
+package DAO;
+
+import Models.Conta;
 
 /**
  *
- * @author Professor
+ * @author nycolas_teixeira
  */
-public class ContaDAO {
+public interface ContaDAO {
     
+
+public void inserirConta(Conta conta);
+public Conta buscarContaPorDocTitular(String documento);
+
+
+
+
+
 }

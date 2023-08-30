@@ -156,7 +156,7 @@ public class Cliente extends javax.swing.JFrame {
         do {
             String doc = JOptionPane.showInputDialog("Informe seu documento (CPF/CNPJ)");
             conta = contaController.buscarContaPorDocumentoTitular(doc);
-       
+            System.out.println(conta.getId());
         } while (conta == null);
 
         this.numeroConta.setText(String.valueOf(conta.getNumero()));

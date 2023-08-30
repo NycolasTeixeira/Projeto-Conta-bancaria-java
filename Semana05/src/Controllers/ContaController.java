@@ -1,5 +1,6 @@
 package Controllers;
 
+import DAO.postgres.ContaDAOPostgres;
 import Models.Conta;
 import Models.ContaCorrente;
 import Models.ContaPoupanca;
@@ -7,6 +8,7 @@ import Models.ContaSalario;
 import Models.Pessoa;
 import Models.PessoaFisica;
 import Models.PessoaJuridica;
+import Util.GerenciadorConexao;
 import javax.swing.JOptionPane;
 import semana05.Semana05;
 
@@ -15,11 +17,18 @@ public class ContaController {
     public int criarConta(Pessoa titular, boolean corrente, boolean poupanca, boolean salario) {
         Conta conta = corrente ? new ContaCorrente(titular) : poupanca ? new ContaPoupanca(titular) : new ContaSalario(titular);
         Semana05.banco.add(conta);
+         new ContaDAOPostgres(GerenciadorConexao.getConexao()).inserirConta(conta);
         return conta.getNumero();
     }
 
     public Conta buscarContaPorDocumentoTitular(String documento) {
-        for (Conta conta : Semana05.banco) {
+        return new ContaDAOPostgres(GerenciadorConexao.getConexao()).buscarContaPorDocTitular(documento);
+        
+        
+        
+        
+        
+        /*   for (Conta conta : Semana05.banco) {
             if (conta.getTitular() instanceof PessoaFisica) {
                 PessoaFisica p = (PessoaFisica) conta.getTitular();
                 if (p.getCpf().equals(documento)) {
@@ -33,7 +42,10 @@ public class ContaController {
             }
         }
         return null;
+    
+*/
     }
+
     
     public Conta buscarPorNumero(int numero) {
         for (Conta conta : Semana05.banco) {

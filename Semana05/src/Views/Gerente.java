@@ -175,13 +175,11 @@ public class Gerente extends javax.swing.JFrame {
         
         // CHAMA QUEM CRIA CONTA
         int numeroConta = contaController.criarConta(titular, corrente, poupanca, salario);
+        new ContaController().criarConta(titular, corrente, poupanca, salario);
             
         JOptionPane.showMessageDialog(this, "Sua conta foi criada com sucesso. O número dela é: " + numeroConta);
         limparCampos();
-        
-        for(Conta c : Semana05.banco){
-            System.out.println("Nº: " + c.getNumero() + " Titular: " + c.getTitular().getNome());
-        }
+       
          
     }//GEN-LAST:event_criarContaActionPerformed
 

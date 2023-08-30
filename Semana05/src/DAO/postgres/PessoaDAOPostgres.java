@@ -19,7 +19,7 @@ public class PessoaDAOPostgres implements DAO.PessoaDAO {
     public void inserirPessoa(Pessoa pessoa) {
 
         try {
-            String sql = "INSERT INTO pessoa(id, nome, documento, tipo) VALUES (?, ?, ?, CAST(? as tipo_pessoa)";
+            String sql = "INSERT INTO pessoa(id, nome, documento, tipo) VALUES (?, ?, ?, CAST(? as tipo_pessoa))";
 
             String tipoPessoa = (pessoa instanceof PessoaFisica) ? "PF" : "PJ";
             

@@ -3,6 +3,7 @@ package DAO.postgres;
 import DAO.ContaDAO;
 import Models.Conta;
 import Models.ContaCorrente;
+import Models.ContaPoupanca;
 import Models.ContaSalario;
 import Models.Pessoa;
 import Models.PessoaFisica;
@@ -24,7 +25,7 @@ public class ContaDAOPostgres implements ContaDAO {
     @Override
     public void inserirConta(Conta conta) {
 
-        String sql = "INSERT INTO conta (id, numero, saldo, tipo, pessoa_id) VALUES (?,?,?, CAST (? as tipo_conta), ?)";
+        String sql = "INSERT INTO conta (id, numero, saldo, tipo, pessoa_id, senha) VALUES (?,?,?, CAST (? as tipo_conta), ?, ?)";
         String tipoConta = (conta instanceof ContaCorrente) ? "corrente" : (conta instanceof ContaSalario) ? "salario" : "poupanca";
 
         try {
@@ -34,6 +35,7 @@ public class ContaDAOPostgres implements ContaDAO {
             stm.setDouble(3, conta.getSaldo());
             stm.setString(4, tipoConta);
             stm.setObject(5, conta.getTitular().getId());
+            stm.setString(6, conta.getSenha());
 
             stm.executeUpdate();
 
@@ -65,14 +67,22 @@ public class ContaDAOPostgres implements ContaDAO {
                 } else {
                     pessoa = new PessoaJuridica(id, nome, documento);
                 }
-                
+
                 UUID idConta = resultado.getObject("id", UUID.class);
                 int numero = resultado.getInt("numero");
                 double saldo = resultado.getDouble("saldo");
                 String tipoC = resultado.getString("tipo");
+                String senha = resultado.getString("senha");
 
                 if (tipoC.equals("corrente")) {
-                    return new ContaCorrente(numero, saldo, pessoa, idConta);
+                    return new ContaCorrente(numero, saldo, pessoa, idConta, senha);
+                }
+                if (tipoC.equals("salario")) {
+                    return new ContaSalario(numero, saldo, pessoa, idConta, senha);
+                }
+
+                if (tipoC.equals("poupanca")) {
+                    return new ContaPoupanca(numero, saldo, pessoa, idConta, senha);
                 }
             }
 
@@ -84,16 +94,9 @@ public class ContaDAOPostgres implements ContaDAO {
         return null;
     }
 
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public void atualizaSaldo(Conta conta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

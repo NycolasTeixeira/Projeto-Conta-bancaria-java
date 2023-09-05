@@ -9,24 +9,21 @@ import Models.Pessoa;
 import Models.PessoaFisica;
 import Models.PessoaJuridica;
 import Util.GerenciadorConexao;
+import factory.FactoryDAO;
 import javax.swing.JOptionPane;
 import semana05.Semana05;
 
 public class ContaController {
 
-    public int criarConta(Pessoa titular, boolean corrente, boolean poupanca, boolean salario) {
-        Conta conta = corrente ? new ContaCorrente(titular) : poupanca ? new ContaPoupanca(titular) : new ContaSalario(titular);
+    public int criarConta(Pessoa titular, boolean corrente, boolean poupanca, boolean salario, String senha) {
+        Conta conta = corrente ? new ContaCorrente(titular, senha) : poupanca ? new ContaPoupanca(titular, senha) : new ContaSalario(titular, senha);
         Semana05.banco.add(conta);
-         new ContaDAOPostgres(GerenciadorConexao.getConexao()).inserirConta(conta);
+         FactoryDAO.makeContaDAO().inserirConta(conta);
         return conta.getNumero();
     }
 
     public Conta buscarContaPorDocumentoTitular(String documento) {
-        return new ContaDAOPostgres(GerenciadorConexao.getConexao()).buscarContaPorDocTitular(documento);
-        
-        
-        
-        
+        return FactoryDAO.makeContaDAO().buscarContaPorDocTitular(documento);
         
         /*   for (Conta conta : Semana05.banco) {
             if (conta.getTitular() instanceof PessoaFisica) {
@@ -42,8 +39,7 @@ public class ContaController {
             }
         }
         return null;
-    
-*/
+   */
     }
 
     

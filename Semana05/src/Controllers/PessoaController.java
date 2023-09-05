@@ -5,6 +5,7 @@ import Models.Pessoa;
 import Models.PessoaFisica;
 import Models.PessoaJuridica;
 import Util.GerenciadorConexao;
+import factory.FactoryDAO;
 
 public class PessoaController {
 
@@ -21,7 +22,7 @@ public class PessoaController {
 
         }
 
-        new PessoaDAOPostgres(GerenciadorConexao.getConexao()).inserirPessoa(pessoa);
+        FactoryDAO.makePessoaDAO().inserirPessoa(pessoa);
 
         return pessoa;
     }

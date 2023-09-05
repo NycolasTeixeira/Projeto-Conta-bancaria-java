@@ -157,6 +157,20 @@ public class Cliente extends javax.swing.JFrame {
             String doc = JOptionPane.showInputDialog("Informe seu documento (CPF/CNPJ)");
             conta = contaController.buscarContaPorDocumentoTitular(doc);
             System.out.println(conta.getId());
+
+            if (conta != null) {
+                boolean senhaValida = false;
+                do {
+                    String senha = JOptionPane.showInputDialog("informe a senha");
+                    conta.validaSenha(senha);
+                    if(senhaValida == false){
+                        JOptionPane.showMessageDialog(this, "senha incorreta");
+                    }
+
+                } while (senhaValida == false);
+
+            }
+
         } while (conta == null);
 
         this.numeroConta.setText(String.valueOf(conta.getNumero()));
@@ -193,7 +207,6 @@ public class Cliente extends javax.swing.JFrame {
         Double valor = Double.parseDouble(JOptionPane.showInputDialog("INFORME O VALOR DO SAQUE."));
         conta = contaController.transferir(this.conta, contaTrans, valor);
         this.saldo.setText("R$ " + String.valueOf(conta.getSaldo()));
-        
 
 
     }//GEN-LAST:event_transferirActionPerformed

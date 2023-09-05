@@ -16,7 +16,7 @@ public interface ContaDAO {
 
 public void inserirConta(Conta conta);
 public Conta buscarContaPorDocTitular(String documento);
-
+public void atualizaSaldo(Conta conta);
 
 
 

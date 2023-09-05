@@ -4,16 +4,16 @@ import java.util.UUID;
 
 public class ContaSalario extends Conta {
 
-    public ContaSalario(int numero, double saldo, Pessoa titular, UUID id) {
-        super(numero, saldo, titular, id);
+    public ContaSalario(int numero, double saldo, Pessoa titular, UUID id, String senha) {
+        super(numero, saldo, titular, id, senha);
     }
     
     
     
     
     
-    public ContaSalario(Pessoa titular) {
-        super(titular);
+    public ContaSalario(Pessoa titular, String senha) {
+        super(titular, senha);
     }    
     
 }

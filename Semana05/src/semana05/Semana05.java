@@ -1,6 +1,7 @@
 package semana05;
 
 import Models.Conta;
+import Models.Pessoa;
 import Util.GerenciadorConexao;
 import java.util.ArrayList;
 import Views.Sistema;
@@ -16,7 +17,7 @@ public class Semana05 {
     
     public static void main(String[] args) {
        new Sistema().setVisible(true);
-     
        GerenciadorConexao.getConexao();
+
     }
 }

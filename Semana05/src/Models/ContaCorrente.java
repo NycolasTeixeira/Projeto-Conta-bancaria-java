@@ -6,14 +6,14 @@ import java.util.UUID;
 
 public class ContaCorrente extends Conta {
 
-    public ContaCorrente(int numero, double saldo, Pessoa titular, UUID id) {
-        super(numero, saldo, titular, id);
+    public ContaCorrente(int numero, double saldo, Pessoa titular, UUID id, String senha) {
+        super(numero, saldo, titular, id, senha);
     }
     
    
     
-    public ContaCorrente(Pessoa titular) {
-        super(titular);
+    public ContaCorrente(Pessoa titular, String senha) {
+        super(titular, senha);
     } 
 
     
